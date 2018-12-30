@@ -12,7 +12,7 @@ INSERT INTO products VALUES (1,'Salad Shooter','Kitchen & Appliances',50, 9.99),
 (7,'1989 PGA Tour commemorative mug ','Kitchen & Appliances',400, 1.99),
 (8,'Eyes Wide Shut on Blue Ray','Electronics',25, 4.99),
 (9,'Mr. Met backpack NY Mets Backpack','Kids',30, 14.99),
-(10,'Scorpio Woman T-Shirt','Womeanswear',500, 4.99),
+(10,'Scorpio Woman T-Shirt','Womeanswear',500, 4.99);
 
 
 COMMIT;
