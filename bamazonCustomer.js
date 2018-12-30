@@ -84,9 +84,48 @@ const query = "SELECT * FROM products";
             message: "How many would you like to buy?"
           }
         ])
-          
-    });
-}
+        .then(function(answer) {
+            // get the information of the chosen item
+            var chosenItem;
+            for(let i=0; i<results.length; i++){
+            // var chosenItem;
+            // for (var i = 0; i < results.length; i++) {
+              if (results[i].product_name === answer.choice) {
+                chosenItem = results[i];
+              }
+            }
+    
+            // determine if number of products was greater than the quantity requsted  
+            if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
+
+            console.log ( `There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
+              //bid was high enough, so update db, let the user know, and start over
+            //   connection.query(
+            //     "UPDATE auctions SET ? WHERE ?",
+            //     [
+            //       {
+            //         highest_bid: answer.bid
+            //       },
+            //       {
+            //         id: chosenItem.id
+            //       }
+            //     ],
+            //     function(error) {
+            //       if (error) throw err;
+            //       console.log("Bid placed successfully!");
+            //       start();
+            //     }
+            //   );
+            }
+            else {
+              // bid wasn't high enough, so apologize and start over
+              console.log("Your bid was too low. Try again...");
+            //   start();
+            }
+          });
+            
+        });
+    }
 
     displayitem();
     buyitem();
