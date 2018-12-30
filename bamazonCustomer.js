@@ -99,6 +99,9 @@ const query = "SELECT * FROM products";
             if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
 
             console.log ( `There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
+            let total = answer.quantity * chosenItem.price;
+            console.log ( `Your total is: ${total}`)
+
               //bid was high enough, so update db, let the user know, and start over
             //   connection.query(
             //     "UPDATE auctions SET ? WHERE ?",
