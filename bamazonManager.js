@@ -70,24 +70,20 @@ var viewProd = ()=>{
 }
 //view low inventory
 var viewLow = ()=>{
-     query = "SELECT stock_quantity FROM products";
+     query = "SELECT item_id, product_name,stock_quantity FROM products";
      connection.query(query,function(err, results){
         for(let i=0; i<results.length; i++){
             const inventory = results[i]
-            const lowStock = inventory.stock_quantity;
-         if (lowStock <= 100){
-             console.log(lowStock);
-        //  console.log(Table.print(lowStock));
-            // console.log(inventory.stock_quantity);
+         if (inventory.stock_quantity <= 100){
+          console.log(Table.print(inventory));
           }
+          else
+          //this is console.logging the phrase for every item in the database
+          console.log("You have enough of everything")
+
         }
     });
 }
-
-
-//           else
-//     console.log("You have enough of everything")
-// }
 
         
 // add to inventory
