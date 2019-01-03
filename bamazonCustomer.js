@@ -99,23 +99,27 @@ const query = "SELECT * FROM products";
             if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
 
             console.log ( `There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
+            // displaying total puchase ammount 
             let total = answer.quantity * chosenItem.price;
             console.log ( `Your total is: ${total}`)
-
+            let quantUpdate = chosenItem.stock_quantity - answer.quantity
+            console.log (`i am the new quantity ${quantUpdate}`)
               //bid was high enough, so update db, let the user know, and start over
             //   connection.query(
-            //     "UPDATE auctions SET ? WHERE ?",
+            //     "UPDATE products SET ? WHERE ?",
             //     [
             //       {
-            //         highest_bid: answer.bid
+            //        stock_quantity: quantUpdate
             //       },
-            //       {
-            //         id: chosenItem.id
-            //       }
+            //     //   {
+            //     //     item_id: chosenItem.item_id
+            //     //   }
             //     ],
             //     function(error) {
             //       if (error) throw err;
             //       console.log("Bid placed successfully!");
+            //       console.log("new stock" + stock_quantity)
+
             //       start();
             //     }
             //   );
