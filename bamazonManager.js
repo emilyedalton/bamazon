@@ -52,7 +52,21 @@ var managerActions = ()=>{
 var count = 0;
 //view products for sale
 var viewProd = ()=>{
+    const query = "SELECT item_id, product_name, price FROM products";
+    connection.query(query,function(err, results){
+       //  console.log(res);
+       
+       for(let i=0; i<results.length; i++){
+           const products = results[i]; 
+         
+           console.log(Table.print(products));
+       
+    
     console.log("I am the product list")
+       
+}
+
+})
 }
 //view low inventory
 var viewLow = ()=>{
