@@ -19,3 +19,54 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
+//list a set of menu options for the manager
+var managerActions = ()=>{
+    inquirer.prompt([
+        { type: "list",
+          message: "What would you like to do?",
+          choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"],
+          name: "manage",
+
+
+}
+//switch case for calling the functions for the manager action choices
+]).then(function(answers) {
+
+    switch (answers.manage){
+    case "View Products for Sale": 
+    viewProd();
+    break;
+    case "View Low Inventory": 
+    viewLow();
+    break;
+    case "Add to Inventory": 
+    addStock();
+    break;
+    case "Add New Product": 
+    addProd();
+    break;
+    }
+})
+}
+
+var count = 0;
+//view products for sale
+var viewProd = ()=>{
+    console.log("I am the product list")
+}
+//view low inventory
+var viewLow = ()=>{
+    console.log("I am the low inventory")
+}
+// add to inventory
+var addStock = ()=>{
+    console.log("I am the added stock")
+
+}
+//add new product
+var addProd = ()=>{
+    console.log("I am the added product")
+
+
+}
+managerActions();
