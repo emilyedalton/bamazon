@@ -93,8 +93,56 @@ var addStock = ()=>{
 }
 //add new product
 var addProd = ()=>{
-    console.log("I am the added product")
+    inquirer.prompt([
+        { 
+          type: 'input',
+          message: "What item would you like to add?",
+          name: "new_item",
+        },
+        { 
+            type: 'list',
+            message: "What department would you like to place the item in?",
+            choices: ['Kitchen & Appliances','Electronics','Footwear', 'Home Decor', 'Kids', 'Womenswear'],
+            name: "department",
+          },
+          { 
+            type: 'input',
+            message: "How much stock?",
+            name: "how_many",
+          },
+          { 
+            type: 'input',
+            message: "What is the price?",
+            name: "item_price",
+          },
 
 
-}
+        ])
+        .then(function(answers) {
+           
+                console.log("Inserting a new product...\n");
+              var query = connection.query(
+                  "INSERT INTO products SET ?",
+                  {
+                    product_name: answers.new_item,
+                    department_name: answers.department,
+                    stock_quantity: answers.how_many,
+                    price:answers.item_price
+
+                  },
+        
+                
+        
+            function(err, res) {
+                if(err){
+                    console.log(err);
+                }
+        
+                console.log(res);
+            });
+        });
+
+        }
+
+
 managerActions();
