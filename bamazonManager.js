@@ -70,8 +70,26 @@ var viewProd = ()=>{
 }
 //view low inventory
 var viewLow = ()=>{
-    console.log("I am the low inventory")
+     query = "SELECT stock_quantity FROM products";
+     connection.query(query,function(err, results){
+        for(let i=0; i<results.length; i++){
+            const inventory = results[i]
+            const lowStock = inventory.stock_quantity;
+         if (lowStock <= 100){
+             console.log(lowStock);
+        //  console.log(Table.print(lowStock));
+            // console.log(inventory.stock_quantity);
+          }
+        }
+    });
 }
+
+
+//           else
+//     console.log("You have enough of everything")
+// }
+
+        
 // add to inventory
 var addStock = ()=>{
     console.log("I am the added stock")
