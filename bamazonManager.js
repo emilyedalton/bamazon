@@ -73,13 +73,12 @@ var viewLow = ()=>{
      query = "SELECT item_id, product_name,stock_quantity FROM products";
      connection.query(query,function(err, results){
         for(let i=0; i<results.length; i++){
-            const inventory = results[i]
+            var inventory = results[i]
          if (inventory.stock_quantity <= 100){
           console.log(Table.print(inventory));
           }
-          else
           //this is console.logging the phrase for every item in the database
-          console.log("You have enough of everything")
+          //console.log("You have enough of everything")
 
         }
     });
@@ -88,9 +87,44 @@ var viewLow = ()=>{
         
 // add to inventory
 var addStock = ()=>{
-    console.log("I am the added stock")
+    var stockArray = [];
+    query = "SELECT * FROM products";
+     connection.query(query,function(err, results){
+        for(let i=0; i<results.length; i++){
+            // var lowInventory = results[i];
+            // if (lowInventory.stock_quantity <= 100){
+            stockArray.push(`${results[i].product_name}  ${results[i].stock_quantity}`)
+          
+        //   console.log(stockArray)
+        }
+    inquirer.prompt([
+        {  
+            type: 'list',
+            message: "What item would you like to add stock to?",
+            choices: stockArray,
+            name: "what_item",
+          }
 
-}
+        ])
+    //     .then(function(answers) {
+           
+    //             console.log("Inserting a new product...\n");
+    //           var query = connection.query(
+    //               "INSERT INTO products SET ?",{
+    //                 stock_quantity: answers.add_stock,
+
+    //               }
+                  
+    // console.log("I am the added stock")
+    //           )
+    
+    });
+        }
+    
+
+        //     });
+        // }
+
 //add new product
 var addProd = ()=>{
     inquirer.prompt([
