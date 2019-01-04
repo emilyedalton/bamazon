@@ -77,7 +77,7 @@ var viewLow = ()=>{
          if (inventory.stock_quantity <= 100){
           console.log(Table.print(inventory));
           }
-          //this is console.logging the phrase for every item in the database
+          //this is console.logging the phrase for every item in the database if I put an else statement here
           //console.log("You have enough of everything")
 
         }
@@ -87,44 +87,57 @@ var viewLow = ()=>{
         
 // add to inventory
 var addStock = ()=>{
-    var stockArray = [];
+    
     query = "SELECT * FROM products";
      connection.query(query,function(err, results){
-        for(let i=0; i<results.length; i++){
-            // var lowInventory = results[i];
-            // if (lowInventory.stock_quantity <= 100){
-            stockArray.push(`${results[i].product_name}  ${results[i].stock_quantity}`)
+        // for(let i=0; i<results.length; i++){
+        //     stockArray.push(`${results[i].product_name}  ${results[i].stock_quantity}`)
           
         //   console.log(stockArray)
-        }
+        
     inquirer.prompt([
         {  
-            type: 'list',
+            type: 'rawlist',
             message: "What item would you like to add stock to?",
-            choices: stockArray,
-            name: "what_item",
+            choices:  function() {
+                var stockArray = [];
+                for (var i = 0; i < results.length; i++) {
+                const products = results[i];
+                  stockArray.push(`${products.product_name} (${products.stock_quantity})`);
+                }
+                return stockArray;
+              },
+            name: "stock_needed",
+          },
+          { 
+            type: 'input',
+            message: "How much stock would you like to add?",
+            name: "add_stock",
           }
 
         ])
-    //     .then(function(answers) {
+        .then(function(answers) {
+            
            
-    //             console.log("Inserting a new product...\n");
-    //           var query = connection.query(
-    //               "INSERT INTO products SET ?",{
-    //                 stock_quantity: answers.add_stock,
+            //wont update the database
+            
+                console.log("Adding Stock...\n");
+                var query = connection.query(
+                  "UPDATE products SET ?",{
+                    stock_quantity: chosenItem.add_stock,
 
-    //               }
-                  
-    // console.log("I am the added stock")
-    //           )
-    
-    });
+                  })
+                });
+            })
         }
-    
-
-        //     });
-        // }
-
+        
+            
+            
+            // })
+            // }
+        
+    // console.log("I am the added stock")
+         
 //add new product
 var addProd = ()=>{
     inquirer.prompt([
