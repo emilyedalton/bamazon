@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
   user: "emilyedalton",
 
   // Your password
-  password: "681262catZ",
+  password: "",
   database: "bamazon"
 });
 connection.connect(function(err) {
@@ -27,41 +27,21 @@ var displayitem = () =>{
        
        for(let i=0; i<results.length; i++){
            const products = results[i]; 
-         
+        console.log(`------------------------------------`)
            console.log(Table.print(products));
-       //     console.log(products.product_name);
-    //    console.log(`Product ID: ${products.item_id} | Product Name: ${products.product_name} | Price (USD) ${products.price} `);
-    //    var t = new Table
- 
-    //    forEach(function(products) {
-    //      t.cell('Product Id', products.item_id)
-    //      t.cell('Description', products.product_name)
-    //      t.cell('Price, USD',products.price, Table.number(2))
-    //      t.newRow()
-    //    })
-        
-    //    console.log(t.toString())
+
     }
 
 })
 }
 //first display all of the items available for sale. Include the ids, names, and prices of products for sale.
+var start = () =>{
 var buyitem = () =>{
     
      // query the database for all items being auctioned
 const query = "SELECT * FROM products";
      connection.query(query,function(err, results){
-        //  console.log(res);
-        
-        // for(let i=0; i<res.length; i++){
-        //     const products = res[i]; 
-        //     console.log(products.product_name);
-     
-
-  
-  
-
-  
+       
         // once you have the items, prompt the user for which they'd like to bid on
         inquirer
           .prompt([
@@ -76,12 +56,12 @@ const query = "SELECT * FROM products";
                 }
                 return choiceArray;
               },
-              message: "What item would you like to buy?"
+              message: "What is the ID number of the product you would like to buy?"
             },
             {
             name: "quantity",
             type: "input",
-            message: "How many would you like to buy?"
+            message: "How many units of the product would you like to buy?"
           }
         ])
         .then(function(answer) {
@@ -100,9 +80,13 @@ const query = "SELECT * FROM products";
 
             console.log ( `There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
             // displaying total puchase ammount 
+
             let total = answer.quantity * chosenItem.price;
+
             console.log ( `Your total is: ${total}`)
+
             let quantUpdate = chosenItem.stock_quantity - answer.quantity
+        // code below won't update database
             console.log (`i am the new quantity ${quantUpdate}`)
               //bid was high enough, so update db, let the user know, and start over
             //   connection.query(
@@ -126,8 +110,8 @@ const query = "SELECT * FROM products";
             }
             else {
               // bid wasn't high enough, so apologize and start over
-              console.log("Your bid was too low. Try again...");
-            //   start();
+              console.log("Insufficient quantity! Please try again...");
+              start();
             }
           });
             
@@ -136,3 +120,6 @@ const query = "SELECT * FROM products";
 
     displayitem();
     buyitem();
+
+}
+start ();
