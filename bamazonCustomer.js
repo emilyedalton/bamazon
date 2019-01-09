@@ -25,16 +25,9 @@ connection.connect(function (err) {
 var displayitem = () => {
     const query = "SELECT item_id, product_name, price FROM products";
     connection.query(query, function (err, results) {
-        //  console.log(res);
+        console.table(results);
 
-        for (let i = 0; i < results.length; i++) {
-            const products = results[i];
-            console.log(`------------------------------------`)
-            // console.log(Table.print(products));
-console.table(products)
-        }
-
-    })
+});
 }
 //start function not working
 
