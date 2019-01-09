@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "681262catZ",
+    password: "",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -36,6 +36,7 @@ var displayitem = () => {
 }
 //first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 var start = () => {
+    
     var buyitem = () => {
 
         // query the database for all items being auctioned
@@ -51,7 +52,8 @@ var start = () => {
                         choices: function () {
                             var choiceArray = [];
                             for (var i = 0; i < results.length; i++) {
-                                choiceArray.push(results[i].product_name);
+                                const products = results[i];
+                                choiceArray.push(products.product_name);
                             }
                             return choiceArray;
                         },
@@ -67,6 +69,8 @@ var start = () => {
                     // get the information of the chosen item
                     var chosenItem;
                     for (let i = 0; i < results.length; i++) {
+                        // var chosenItem;
+                        // for (var i = 0; i < results.length; i++) {
                         if (results[i].product_name === answer.choice) {
                             chosenItem = results[i];
                         }
@@ -75,30 +79,30 @@ var start = () => {
                     // determine if number of products was greater than the quantity requsted  
                     if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
 
-                        // console.log(`There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
-                        // // displaying total puchase ammount 
+                        console.log(`There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
+                        // displaying total puchase ammount 
 
-                        // let total = answer.quantity * chosenItem.price;
+                        let total = answer.quantity * chosenItem.price;
 
-                        // console.log(`Your total is: ${total}`)
+                        console.log(`Your total is: ${total}`)
 
-                        // let quantUpdate = chosenItem.stock_quantity - answer.quantity
-                        // code below won't update database
-                        // console.log(`i am the new quantity ${quantUpdate}`)
+                        let quantUpdate = chosenItem.stock_quantity - answer.quantity
+                        
                         //bid was high enough, so update db, let the user know, and start over
                           connection.query(
                             "UPDATE products SET ? WHERE ?",
                             [
                               {
-                               stock_quantity: answer.quantity
+                               stock_quantity: quantUpdate
                               },
-                            //   {
-                            //     item_id: chosenItem.item_id
-                            //   }
+                              {
+                                item_id: chosenItem.item_id
+                              }
                             ],
+                            // this error function was causing a problem because I had the console.log inside of it
                             function(error) {
                               if (error) throw err;
-                              console.log("new stock" + stock_quantity)
+                            //   console.log("new stock" + stock_quantity)
 
                               start();
                             }
