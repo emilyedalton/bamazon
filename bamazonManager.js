@@ -56,7 +56,6 @@ var count = 0;
 var viewProd = () => {
     const query = "SELECT item_id, product_name, price FROM products";
     connection.query(query, function (err, results) {
-        //  console.log(res);
 
         for (let i = 0; i < results.length; i++) {
             const products = results[i];
@@ -92,11 +91,7 @@ var addStock = () => {
 
   const query = "SELECT * FROM products";
     connection.query(query, function (err, results) {
-        // for(let i=0; i<results.length; i++){
-        //     stockArray.push(`${results[i].product_name}  ${results[i].stock_quantity}`)
-
-        //   console.log(stockArray)
-
+     
         inquirer.prompt([
             {
                 name: "stock_needed",
@@ -120,17 +115,9 @@ var addStock = () => {
 
         ])
             .then(function (answer) {
-                // var chosenItem;
                 for (let i = 0; i < results.length; i++) {
                     if (results[i].product_name === answer.stock_needed) {
-                //         chosenItem = results[i];
-                //     }
-
-                //     console.log(chosenItem);
-
-                // }
-
-                // console.log(`${chosenItem} ${chosenItem.stock_quantity}`)
+               
                 let newQuant = parseFloat(results[i].stock_quantity) + parseFloat(answer.add_stock)
                 console.log (`i am the new quantity ${newQuant}`)
                 //wont update the database
@@ -168,17 +155,7 @@ var addStock = () => {
             });
         });
     }
-            
-                
-            
-        
 
-
-
-// })
-// }
-
-// console.log("I am the added stock")
 
 //add new product
 var addProd = () => {
