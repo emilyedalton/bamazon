@@ -1,6 +1,8 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var Table = require('easy-table')
+var Table = require('easy-table');
+const cTable = require('console.table');
+
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -12,7 +14,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "681262catZ",
+    password: "",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -51,39 +53,35 @@ var managerActions = () => {
     })
 }
 
-var count = 0;
 //view products for sale
 var viewProd = () => {
     const query = "SELECT item_id, product_name, price FROM products";
     connection.query(query, function (err, results) {
 
-        for (let i = 0; i < results.length; i++) {
-            const products = results[i];
+    
+            console.Table(results);
 
-            console.log(`------------------------------------`)
-
-            console.log(Table.print(products));
-
-        }
+        
 
     })
 }
 //view low inventory
-var viewLow = () => {
-    query = "SELECT item_id, product_name,stock_quantity FROM products";
-    connection.query(query, function (err, results) {
-        for (let i = 0; i < results.length; i++) {
-            var inventory = results[i]
-            //showing quantity for items with less than 100 units of inventory
-            if (inventory.stock_quantity <= 100) {
-                console.log(Table.print(inventory));
-            }
-            //this is console.logging the phrase for every item in the database if I put an else statement here
-            //console.log("You have enough of everything")
+//showing quantity for items with greater than 100 units of inventory
 
-        }
-    });
-}
+var viewLow = () => {
+    
+    query = "SELECT item_id, product_name,stock_quantity FROM bamazon.products WHERE stock_quantity > 100";
+    connection.query(query, function (err, results) {
+        if (err) throw err;
+
+                console.table(results);
+            });
+          
+ 
+            }
+        
+
+    
 
 
 // add to inventory
