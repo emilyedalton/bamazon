@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "681262catZ",
+    password: "",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -90,7 +90,7 @@ var viewLow = () => {
 // add to inventory
 var addStock = () => {
 
-    query = "SELECT * FROM products";
+  const query = "SELECT * FROM products";
     connection.query(query, function (err, results) {
         // for(let i=0; i<results.length; i++){
         //     stockArray.push(`${results[i].product_name}  ${results[i].stock_quantity}`)
@@ -99,35 +99,55 @@ var addStock = () => {
 
         inquirer.prompt([
             {
+                name: "stock_needed",
                 type: 'rawlist',
-                message: "What item would you like to add stock to?",
                 choices: function () {
                     var stockArray = [];
                     for (var i = 0; i < results.length; i++) {
                         const products = results[i];
-                        stockArray.push(`${products.product_name} (${products.stock_quantity})`);
+                        stockArray.push(products.product_name);
                     }
                     return stockArray;
                 },
-                name: "stock_needed",
+                message: "What item would you like to add stock to?",
+
             },
             {
+                name: "add_stock",
                 type: 'input',
                 message: "How much stock would you like to add?",
-                name: "add_stock",
             }
 
         ])
-            .then(function (answers) {
+            .then(function (answer) {
+                // var chosenItem;
+                for (let i = 0; i < results.length; i++) {
+                    if (results[i].product_name === answer.stock_needed) {
+                //         chosenItem = results[i];
+                //     }
 
+                //     console.log(chosenItem);
 
+                // }
+
+                // console.log(`${chosenItem} ${chosenItem.stock_quantity}`)
+                let newQuant = parseFloat(results[i].stock_quantity) + parseFloat(answer.add_stock)
+                console.log (`i am the new quantity ${newQuant}`)
                 //wont update the database
 
                 console.log("Adding Stock...\n");
-                var query = connection.query(
-                    "INSERT into products SET ? WHERE ?", {
-                        stock_quantity: 100
+                connection.query(
+
+                    "UPDATE products SET? WHERE?", 
+                        [
+                            {
+                        stock_quantity: newQuant
                     },
+
+                    {
+                        item_id:  results[i].item_id
+                    }
+                ],   
                         function(err, res) {
                             if(err){
                                 console.log(err);
@@ -138,12 +158,20 @@ var addStock = () => {
 
 
 
-            });
+       
                                 console.log("did it update?");
 
-    });
+   
 
 }
+                }
+            });
+        });
+    }
+            
+                
+            
+        
 
 
 

@@ -1,6 +1,8 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require('easy-table')
+const cTable = require('console.table');
+
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -28,14 +30,37 @@ var displayitem = () => {
         for (let i = 0; i < results.length; i++) {
             const products = results[i];
             console.log(`------------------------------------`)
-            console.log(Table.print(products));
-
+            // console.log(Table.print(products));
+console.table(products)
         }
 
     })
 }
+//start function not working
+
+// var start = () => {
+//     inquirer
+//       .prompt([
+//           {
+//             type: "confirm",
+//             message: "Do you want to purchase another item?",
+//             name: "confirm",
+//             default: true
+//           }
+//         ])
+//         .then(function(inquirerResponse) {
+//           // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
+//           if (inquirerResponse.confirm) {
+//           console.log("YAY")
+//           }
+//           else {
+//             console.log("\nThat's okay come again when you are more sure.\n");
+//           }
+//         });
+
+// }
 //first display all of the items available for sale. Include the ids, names, and prices of products for sale.
-var start = () => {
+
     
     var buyitem = () => {
 
@@ -69,8 +94,6 @@ var start = () => {
                     // get the information of the chosen item
                     var chosenItem;
                     for (let i = 0; i < results.length; i++) {
-                        // var chosenItem;
-                        // for (var i = 0; i < results.length; i++) {
                         if (results[i].product_name === answer.choice) {
                             chosenItem = results[i];
                         }
@@ -104,14 +127,16 @@ var start = () => {
                               if (error) throw err;
                             //   console.log("new stock" + stock_quantity)
 
-                              start();
                             }
+
                           );
+                        //   start();
+
                     }
                     else {
                         // bid wasn't high enough, so apologize and start over
                         console.log("Insufficient quantity! Please try again...");
-                        start();
+                        // start();
                     }
                 });
 
@@ -121,5 +146,5 @@ var start = () => {
     displayitem();
     buyitem();
 
-}
-start();
+//start function not working
+// start();
