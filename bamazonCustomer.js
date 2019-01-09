@@ -51,7 +51,6 @@ var start = () => {
                         choices: function () {
                             var choiceArray = [];
                             for (var i = 0; i < results.length; i++) {
-                                // const products = results[i];
                                 choiceArray.push(results[i].product_name);
                             }
                             return choiceArray;
@@ -68,8 +67,6 @@ var start = () => {
                     // get the information of the chosen item
                     var chosenItem;
                     for (let i = 0; i < results.length; i++) {
-                        // var chosenItem;
-                        // for (var i = 0; i < results.length; i++) {
                         if (results[i].product_name === answer.choice) {
                             chosenItem = results[i];
                         }
