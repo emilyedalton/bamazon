@@ -51,8 +51,8 @@ var start = () => {
                         choices: function () {
                             var choiceArray = [];
                             for (var i = 0; i < results.length; i++) {
-                                const products = results[i];
-                                choiceArray.push(products.product_name);
+                                // const products = results[i];
+                                choiceArray.push(results[i].product_name);
                             }
                             return choiceArray;
                         },
@@ -78,35 +78,34 @@ var start = () => {
                     // determine if number of products was greater than the quantity requsted  
                     if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
 
-                        console.log(`There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
-                        // displaying total puchase ammount 
+                        // console.log(`There are ${chosenItem.stock_quantity} ${answer.choice}'s left in the store you can have it!!!!!`)
+                        // // displaying total puchase ammount 
 
-                        let total = answer.quantity * chosenItem.price;
+                        // let total = answer.quantity * chosenItem.price;
 
-                        console.log(`Your total is: ${total}`)
+                        // console.log(`Your total is: ${total}`)
 
-                        let quantUpdate = chosenItem.stock_quantity - answer.quantity
+                        // let quantUpdate = chosenItem.stock_quantity - answer.quantity
                         // code below won't update database
-                        console.log(`i am the new quantity ${quantUpdate}`)
+                        // console.log(`i am the new quantity ${quantUpdate}`)
                         //bid was high enough, so update db, let the user know, and start over
-                        //   connection.query(
-                        //     "UPDATE products SET ? WHERE ?",
-                        //     [
-                        //       {
-                        //        stock_quantity: quantUpdate
-                        //       },
-                        //     //   {
-                        //     //     item_id: chosenItem.item_id
-                        //     //   }
-                        //     ],
-                        //     function(error) {
-                        //       if (error) throw err;
-                        //       console.log("Bid placed successfully!");
-                        //       console.log("new stock" + stock_quantity)
+                          connection.query(
+                            "UPDATE products SET ? WHERE ?",
+                            [
+                              {
+                               stock_quantity: answer.quantity
+                              },
+                            //   {
+                            //     item_id: chosenItem.item_id
+                            //   }
+                            ],
+                            function(error) {
+                              if (error) throw err;
+                              console.log("new stock" + stock_quantity)
 
-                        //       start();
-                        //     }
-                        //   );
+                              start();
+                            }
+                          );
                     }
                     else {
                         // bid wasn't high enough, so apologize and start over

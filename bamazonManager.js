@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "",
+    password: "681262catZ",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -60,7 +60,7 @@ var viewProd = () => {
 
         for (let i = 0; i < results.length; i++) {
             const products = results[i];
-           
+
             console.log(`------------------------------------`)
 
             console.log(Table.print(products));
@@ -75,7 +75,7 @@ var viewLow = () => {
     connection.query(query, function (err, results) {
         for (let i = 0; i < results.length; i++) {
             var inventory = results[i]
-        //showing quantity for items with less than 100 units of inventory
+            //showing quantity for items with less than 100 units of inventory
             if (inventory.stock_quantity <= 100) {
                 console.log(Table.print(inventory));
             }
@@ -125,12 +125,24 @@ var addStock = () => {
 
                 console.log("Adding Stock...\n");
                 var query = connection.query(
-                    "UPDATE products SET ?", {
-                        stock_quantity: chosenItem.add_stock,
+                    "INSERT into products SET ? WHERE ?", {
+                        stock_quantity: 100
+                    },
+                        function(err, res) {
+                            if(err){
+                                console.log(err);
+                            }
+                    
+                            console.log(res);
+                    });
 
-                    })
+
+
             });
-    })
+                                console.log("did it update?");
+
+    });
+
 }
 
 
