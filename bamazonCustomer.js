@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "681262catZ",
+    password: "",
     database: "bamazon"
 });
 connection.connect(function (err) {
