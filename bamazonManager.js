@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "",
+    password: "awesomepassword",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -59,7 +59,7 @@ var viewProd = () => {
     connection.query(query, function (err, results) {
 
     
-            console.Table(results);
+            console.table(results);
 
         
 

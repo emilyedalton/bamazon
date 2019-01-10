@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
     user: "emilyedalton",
 
     // Your password
-    password: "",
+    password: "awesomepassword",
     database: "bamazon"
 });
 connection.connect(function (err) {
@@ -31,27 +31,28 @@ var displayitem = () => {
 }
 //start function not working
 
-// var start = () => {
-//     inquirer
-//       .prompt([
-//           {
-//             type: "confirm",
-//             message: "Do you want to purchase another item?",
-//             name: "confirm",
-//             default: true
-//           }
-//         ])
-//         .then(function(inquirerResponse) {
-//           // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
-//           if (inquirerResponse.confirm) {
-//           console.log("YAY")
-//           }
-//           else {
-//             console.log("\nThat's okay come again when you are more sure.\n");
-//           }
-//         });
+var start = () => {
+    inquirer
+      .prompt([
+          {
+            type: "confirm",
+            message: "Do you want to purchase another item?",
+            name: "confirm",
+            default: true
+          }
+        ])
+        .then(function(inquirerResponse) {
+          // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
+          if (inquirerResponse.confirm ) {
+         buyitem();
+          }
+          else {
+            console.log("\nThat's okay come again when you are more sure.\n"+ inquirerResponse.confirm);
+            return false; 
+        }
+        });
 
-// }
+}
 //first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
     
@@ -123,7 +124,8 @@ var displayitem = () => {
                             }
 
                           );
-                        //   start();
+
+                         return start();
 
                     }
                     else {
