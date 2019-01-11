@@ -52,7 +52,16 @@ var managerActions = () => {
         }
     })
 }
+// a table of all the products 
 
+var prodAll = () => {
+    const query = "SELECT item_id, product_name, price, stock_quantity FROM products";
+    connection.query(query, function (err, results) {
+
+    
+            console.table(results);
+    })
+}
 //view products for sale
 var viewProd = () => {
     const query = "SELECT item_id, product_name, price FROM products";
@@ -70,7 +79,7 @@ var viewProd = () => {
 
 var viewLow = () => {
     
-    query = "SELECT item_id, product_name,stock_quantity FROM bamazon.products WHERE stock_quantity > 100";
+    query = "SELECT item_id, product_name,stock_quantity FROM bamazon.products WHERE stock_quantity < 100";
     connection.query(query, function (err, results) {
         if (err) throw err;
 
@@ -88,7 +97,7 @@ var viewLow = () => {
 
 // add to inventory
 var addStock = () => {
-
+prodAll();
   const query = "SELECT * FROM products";
     connection.query(query, function (err, results) {
      
