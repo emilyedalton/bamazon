@@ -31,23 +31,23 @@ If the user tries to purchase more than 190 the "Insufficent Quantity" message d
 
 ### View Products for Sale
 
-(Manager_ViewProd.gif)
+![](Manager_ViewProd.gif)
 
 ### View Low Inventory
 
-(Manager_ViewLow.gif)
+![](Manager_ViewLow.gif)
 
 
 ### Add to Inventory
 
-(Manager_AddtoInven.gif)
+![](Manager_AddtoInven.gif)
 
 Salad Shooter no longer displays with the low inventory items
 
-(Manager_NoSaladShooter.gif)
+![](Manager_NoSaladShooter.gif)
 
 
 ### Add New Product
 
-(Manager_AddProd.gif)
+![](Manager_AddProd.gif)
 
