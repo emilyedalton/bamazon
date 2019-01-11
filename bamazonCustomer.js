@@ -2,6 +2,7 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require('easy-table')
 const cTable = require('console.table');
+const chalk = require('chalk');
 
 
 var connection = mysql.createConnection({
@@ -19,7 +20,7 @@ var connection = mysql.createConnection({
 });
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("Connected!");
+    console.log(chalk.blue("Connected!"));
 });
 
 var displayitem = () => {
