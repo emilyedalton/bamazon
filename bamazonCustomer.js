@@ -3,7 +3,7 @@ var inquirer = require("inquirer");
 var Table = require('easy-table')
 const cTable = require('console.table');
 const chalk = require('chalk');
-
+const log = console.log;
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -48,7 +48,7 @@ var start = () => {
          buyitem();
           }
           else {
-            console.log("\nThat's okay come again when you are more sure.\n"+ inquirerResponse.confirm);
+            log(chalk.black.bgYellowBright.bold("\nThank you for shopping with us!!!!!!!!!.\n"));
             return false; 
         }
         });
