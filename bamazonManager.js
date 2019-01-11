@@ -61,7 +61,7 @@ var viewProd = () => {
     
             console.table(results);
 
-        
+        managerActions();
 
     })
 }
@@ -75,9 +75,11 @@ var viewLow = () => {
         if (err) throw err;
 
                 console.table(results);
+                managerActions();
+
             });
           
- 
+
             }
         
 
