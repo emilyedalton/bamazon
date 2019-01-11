@@ -35,7 +35,7 @@ If the user tries to purchase more than 190 the "Insufficent Quantity" message d
 
 ### View Low Inventory
 
-![](Manager_ViewLow.gif)
+![](Bamazon_ViewLow.gif)
 
 
 ### Add to Inventory
