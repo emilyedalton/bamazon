@@ -22,7 +22,7 @@ If there is insufficent quantity to fill the order the Customer view will log "I
 
 In the following example, there are 190 Candles shaped like a dog in the warehouse. 
 
-If the user tries to purchase more than 190 the "Insufficent Quantity" message displays: 
+If the user tries to purchase more than 190 the "Insufficent Quantity" message displays and the available items table and selection prompts are rerun: 
 
 
 ## Manager View
