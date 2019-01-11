@@ -131,8 +131,9 @@ var start = () => {
                     }
                     else {
                         // bid wasn't high enough, so apologize and start over
-                        console.log("Insufficient quantity! Please try again...");
-                        // start();
+                        log(chalk.yellow.bgRed.bold("Insufficient quantity! Please try again..."));
+                        displayitem();
+                        buyitem();
                     }
                 });
 
