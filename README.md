@@ -16,7 +16,7 @@ And
 
 After the information is entered into the inquirer promts, the user is shown **whether or not there is sufficient stock in the warehouse to make the transaction** and the **total ammont of their purchase:** 
 
-
+![](assets/Customer_Display_Total.gif)
 
 If there is insufficent quantity to fill the order the Customer view will log "Insufficient Quantity" and the transaction will not go through. 
 
