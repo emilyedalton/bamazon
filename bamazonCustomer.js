@@ -1,3 +1,5 @@
+//The following code was referenced in this project: greatBayBasic.js, lines 1-163, Trilogy Education Inc., https://nu.bootcampcontent.com/NU-Coding-Bootcamp/NUEVA201809FSF4/blob/master/activities/12-week/10-GreatBay/Solved/greatBayBasic.js
+
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require('easy-table')
