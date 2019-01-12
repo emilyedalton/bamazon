@@ -57,8 +57,8 @@ var prodAll = () => {
     const query = "SELECT item_id, product_name, price, stock_quantity FROM products";
     connection.query(query, function (err, results) {
 
-    
-            console.table(results);
+
+        console.table(results);
     })
 }
 //view products for sale
@@ -66,40 +66,40 @@ var viewProd = () => {
     const query = "SELECT item_id, product_name, price FROM products";
     connection.query(query, function (err, results) {
 
-    
-            console.table(results);
+
+        console.table(results);
 
         managerActions();
 
     })
 }
 //view low inventory
-//showing quantity for items with greater than 100 units of inventory
+//showing quantity for items with less than 100 units of inventory
 
 var viewLow = () => {
-    
+
     query = "SELECT item_id, product_name,stock_quantity FROM bamazon.products WHERE stock_quantity < 100";
     connection.query(query, function (err, results) {
         if (err) throw err;
 
-                console.table(results);
-                managerActions();
+        console.table(results);
+        managerActions();
 
-            });
-          
+    });
 
-            }
-        
 
-    
+}
+
+
+
 
 
 // add to inventory
 var addStock = () => {
-prodAll();
-  const query = "SELECT * FROM products";
+    prodAll();
+    const query = "SELECT * FROM products";
     connection.query(query, function (err, results) {
-     
+
         inquirer.prompt([
             {
                 name: "stock_needed",
@@ -125,44 +125,43 @@ prodAll();
             .then(function (answer) {
                 for (let i = 0; i < results.length; i++) {
                     if (results[i].product_name === answer.stock_needed) {
-               
-                let newQuant = parseFloat(results[i].stock_quantity) + parseFloat(answer.add_stock)
-                console.log (`i am the new quantity ${newQuant}`)
-                //wont update the database
 
-                console.log("Adding Stock...\n");
-                connection.query(
+                        let newQuant = parseFloat(results[i].stock_quantity) + parseFloat(answer.add_stock)
+                        console.log(`i am the new quantity ${newQuant}`)
 
-                    "UPDATE products SET? WHERE?", 
-                        [
-                            {
-                        stock_quantity: newQuant
-                    },
+                        console.log("Adding Stock...\n");
+                        connection.query(
 
-                    {
-                        item_id:  results[i].item_id
+                            "UPDATE products SET? WHERE?",
+                            [
+                                {
+                                    stock_quantity: newQuant
+                                },
+
+                                {
+                                    item_id: results[i].item_id
+                                }
+                            ],
+                            function (err, res) {
+                                if (err) {
+                                    console.log(err);
+                                }
+
+                                console.log(res);
+                            });
+
+
+
+
+                        console.log("did it update?");
+
+
+
                     }
-                ],   
-                        function(err, res) {
-                            if(err){
-                                console.log(err);
-                            }
-                    
-                            console.log(res);
-                    });
-
-
-
-       
-                                console.log("did it update?");
-
-   
-
-}
                 }
             });
-        });
-    }
+    });
+}
 
 
 //add new product
