@@ -67,3 +67,15 @@ A series of inquirer prompts asks them to populate the "Product Name", "Departme
 
 ![](assets/Manager_AddProd.gif)
 
+In the previous example the user enters a new item called "Sad Clown Painting" was added to the inventory, and that is reflected in the database. 
+
+![](assets/Sad_Clown_Updated.png)
+
+## Node Packages Used 
+
+* [Chalk](https://www.npmjs.com/package/chalk)
+* [Inquirer](https://www.npmjs.com/package/inquirer)
+* [Easy Table](https://www.npmjs.com/package/easy-table)
+* [Console.Table](https://www.npmjs.com/package/console.table)
+
+
