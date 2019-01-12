@@ -20,9 +20,13 @@ After the information is entered into the inquirer promts, the user is shown **w
 
 If there is insufficent quantity to fill the order the Customer view will log "Insufficient Quantity" and the transaction will not go through. 
 
-In the following example, there are 190 Candles shaped like a dog in the warehouse. 
+In the following example, there are 170 candles shaped like a dog in the warehouse. 
+
 
 If the user tries to purchase more than 190 the "Insufficent Quantity" message displays and the available items table and selection prompts are rerun: 
+
+![](assets/Customer_quantity.gif)
+
 
 
 ## Manager View
