@@ -9,7 +9,7 @@ Customer view then takes the results of the object array from mySQL and prompts 
 
 **The ID of the product they would like to purchase** and **How many units of the product they would like to buy**
 
-After the information is entered into the inquirer promts, the user is shown **whether or not there is sufficient stock in the warehouse to make the transaction** and the **total ammont of their purchase:** 
+After the information is entered into the inquirer promts, the user is shown **whether or not there is sufficient stock in the warehouse to make the transaction** and the **total amount of their purchase:** 
 
 ![](assets/Customer_Display_Total.gif)
 
